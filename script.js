@@ -39,7 +39,8 @@ document.addEventListener('keydown', function (e) {
   const key = e.key;
 
   if (key === word[index]) {
-    spans[index].classList.add('c'); 
+    spans[index].classList.remove('w'); 
+    spans[index].classList.add('c');    
     index++;
     if (index === word.length) {
       correctWords++;
@@ -47,7 +48,7 @@ document.addEventListener('keydown', function (e) {
       newWord();
     }
   } else {
-    spans[index].classList.add('w');
+    spans[index].classList.add('w'); 
     mistakes++;
     mistakesSpan.textContent = mistakes;
   }
