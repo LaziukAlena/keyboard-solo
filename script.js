@@ -35,21 +35,27 @@ function newWord() {
 document.addEventListener('DOMContentLoaded', newWord);
 
 document.addEventListener('keydown', function (e) {
-  const spans = wordDiv.querySelectorAll('span');
-  const key = e.key;
-
-  if (key === word[index]) {
-    spans[index].classList.remove('w'); 
-    spans[index].classList.add('c');    
-    index++;
-    if (index === word.length) {
-      correctWords++;
-      correctCountSpan.textContent = correctWords;
-      newWord();
+    const spans = wordDiv.querySelectorAll('span');
+    const key = e.key;
+  
+    if (key === word[index]) {
+      spans[index].classList.remove('w'); 
+      spans[index].classList.add('c');    
+      index++;
+  
+      if (index === word.length) {
+        if (mistakes === 0) {
+          correctWords++;
+          correctCountSpan.textContent = correctWords;
+        } else {
+          wrongWords++;
+          wrongCountSpan.textContent = wrongWords;
+        }
+        newWord();
+      }
+    } else {
+      spans[index].classList.add('w');
+      mistakes++;
+      mistakesSpan.textContent = mistakes;
     }
-  } else {
-    spans[index].classList.add('w'); 
-    mistakes++;
-    mistakesSpan.textContent = mistakes;
-  }
-});
+  });
